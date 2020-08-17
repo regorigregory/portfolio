@@ -1,0 +1,3 @@
+class QuickSorter extends Sorter{
+    
+}
