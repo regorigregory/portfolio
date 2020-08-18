@@ -1,6 +1,8 @@
 var implementableFunction = function(){throw new Error("Unsupported operation!")}
 
 class Sorter {
+    static speed = 1000;
+
     constructor(){
         this.sorted=false;
         
@@ -19,10 +21,13 @@ class Sorter {
             i : i,
             j:j,
             sortEvent : action,
-            pointerToArray : arr
+            arr : arr
         }
         return paramsObject;
 
     }
+    static sleepWell(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
  
 }

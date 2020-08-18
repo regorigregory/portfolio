@@ -1,36 +1,57 @@
 var stageID = "mainStage";
-
+var stageWidth = 1024;
+var blockHeightMultiplier = 5;
+var baseSpeed = 1000;
+var baseSpeedDivisor = 100;
+var actualSpeed = baseSpeed/baseSpeedDivisor;
+var numberOfElements = 30;
+var selectedSorter = BubbleSorter;
 class App{
 
 }
 sortableHTMLClasses = {
     init:"bg-primary",
-    scan:"bg-warning",
+    scan:"bg-secondary",
     swappable:"bg-danger",
-    swapped:"bg-success"
+    swapped:"bg-secondary"
 }
-var testArray   = Controller.getRandomArray();
+var testArray   = Controller.getRandomArray(numberOfElements);
 var UIhndlr     = UIHandler.getInstance();
 
 var sortableElements = UIhndlr.initMainStage(stageID, testArray);
-var randomArray = Controller.getRandomArray(20);
-var prevParams = undefined;
-var callBackFunction = async function(params){
+var randomArray = Controller.getRandomArray(numberOfElements);
+
+selectedSorter.speed = actualSpeed;
+var callBackFunction = function(params){
     
     var newClass = sortableHTMLClasses[params.action];
     var cleanClass = sortableHTMLClasses.init;
 
-    if (prevParams !=undefined){
-        //debugger;
-        cleanAndAddClass(sortableElements[prevParams.i], cleanClass);
-        cleanAndAddClass(sortableElements[prevParams.j], cleanClass);
-    }
-    window.setTimeout(() => {  console.log("I am gonna sleep for a bit!"); }, 2000);
+ 
+    if(params.action=="swapped"){
+        swapUIUpdate(params, sortableElements);
+      }
     cleanAndAddClass(sortableElements[params.i], newClass);
     cleanAndAddClass(sortableElements[params.j], newClass);
 
-    prevParams = params;
-    return 0;
+
+    return params;
+}
+var swapUIUpdate = function(params, sortableElements){
+    var whatElement = sortableElements[params.i];
+    var whatValue = params.arr[params.i];
+    var whatHeight = whatValue*blockHeightMultiplier;
+
+    var toElement =  sortableElements[params.j];
+    var toValue =  params.arr[params.j];
+    var toHeight = toValue*blockHeightMultiplier;
+
+    whatElement.innerHTML = toValue;
+    whatElement.style.height=toHeight+"px";
+
+    toElement.innerHTML = whatValue;
+    toElement.style.height=whatHeight+"px";
+
 }
 var cleanAndAddClass = function(element, newClass){
     try{
@@ -45,4 +66,4 @@ var cleanAndAddClass = function(element, newClass){
 }
 
 
-BubbleSorter.sortArray(randomArray, callBackFunction)
+selectedSorter.sortArray(randomArray, callBackFunction)

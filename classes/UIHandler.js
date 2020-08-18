@@ -36,8 +36,13 @@ class UIHandler{
         divBeingCooked.innerHTML = number;
         divBeingCooked.style.height = number*5+"px";
         divBeingCooked.style.width = me.stageMaxWidth/nElements+"px";
-        divBeingCooked.style.overflow = "hidden";
-        divBeingCooked.style.border = "1px solid black";
+        divBeingCooked.style["overflow"] = "hidden";
+        divBeingCooked.style["padding"] = "0px";
+        divBeingCooked.style["text-align"] = "center";
+
+
+        divBeingCooked.style["text-overflow"] = "ellipsis";
+        divBeingCooked.style.border = "1px solid white";
 
         return divBeingCooked;
     }
