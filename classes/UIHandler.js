@@ -5,7 +5,7 @@ class UIHandler{
 
     sortableHTMLClasses = {
         untouched:"bg-primary",
-        touched:"bg-warning",
+        scan:"bg-warning",
         swappable:"bg-danger",
         swapped:"bg-success"
     }
@@ -18,11 +18,14 @@ class UIHandler{
     }
     initMainStage(stageDivID, array){
         var stageDiv = document.getElementById(stageDivID);
+        var newDivs = []
         stageDiv.innerHTML = "";
         for(var i=0; i<array.length; i++){
             var cookedDiv = this.getDivElement(array[i], array.length);
             stageDiv.appendChild(cookedDiv);
+            newDivs.push(cookedDiv);
         }
+        return newDivs;
 
     }
 

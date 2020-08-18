@@ -1,46 +1,34 @@
 class Controller{
-    static instance = undefined;
 
-    defaultArraySize = 20;
-    defaultMaximumEntry = 100;
-    defaultMinimumEntry = 10;
-    constructor(){
-        this.sorter = null;
-        this.sortableArray=null;
+    static defaultArraySize = 20;
+    static defaultMaximumEntry = 100;
+    static defaultMinimumEntry = 10;
+
+    static setSorter(sorterInstance){
+        Controller.sorter = sorterInstance;
     }
-    
-    static getInstance(){
-        if(Controller.instance == undefined){
-            Controller.instance = new Controller();
-        }
-        return Controller.instance;
+    static setSortableArray(sortableArray){
+        Controller.sortableArray = sortableArray;
     }
 
-    setSorter(sorterInstance){
-        this.sorter = sorterInstance;
-    }
-    setSortableArray(sortableArray){
-        this.sortableArray = sortableArray;
-    }
-
-    getRandomArray(size){
+    static getRandomArray(size){
         if (size==null) {
-            size=this.defaultArraySize;
+            size=Controller.defaultArraySize;
         }
         var randomArray = []
         while(randomArray.length<size){
-            var tempRandom = this.getRandomInteger();
+            var tempRandom = Controller.getRandomInteger();
             if(randomArray.indexOf(tempRandom)==-1){
                 randomArray.push(tempRandom);
             }
         } 
         return randomArray;
     }
-    getRandomInteger(max){
+    static getRandomInteger(max){
         if (max == undefined){
-            max = this.defaultMaximumEntry;
+            max = Controller.defaultMaximumEntry;
         }
-        return Math.floor(Math.random()*Math.abs(max))+this.defaultMinimumEntry;
+        return Math.floor(Math.random()*Math.abs(max))+Controller.defaultMinimumEntry;
 
     }
 }

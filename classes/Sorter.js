@@ -5,13 +5,24 @@ class Sorter {
         this.sorted=false;
         
     }
-    static sortArray(arr){
+    static sortArray(arr, callback){
         implementableFunction();
     }
     static swap(a,b,arr){
         var temp = arr[b];
         arr[b] = arr[a];
         arr[a] = temp;
+    }
+
+    static getParamsObject(i, j, action, arr){
+        var paramsObject = {
+            i : i,
+            j:j,
+            sortEvent : action,
+            pointerToArray : arr
+        }
+        return paramsObject;
+
     }
  
 }
