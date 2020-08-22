@@ -41,7 +41,7 @@
           </form>
         </div>
         <a class="btn btn-outline-primary" href="#" id="getMeNewArray">Generate new array</a>
-        <a class="btn btn-outline-danger" href="#">Sort!</a>
+        <a class="btn btn-outline-danger" href="#" id="doSorting">Sort!</a>
 
 
       </div>

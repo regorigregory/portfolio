@@ -1,31 +1,36 @@
-var stageID = "mainStage";
-var stageWidth = 1024;
-var blockHeightMultiplier = 5;
-var baseSpeed = 1000;
-var baseSpeedDivisor = 100;
-var actualSpeed = baseSpeed/baseSpeedDivisor;
-var numberOfElements = 30;
-var selectedSorter = BubbleSorter;
-var selectableAlgorithms = {
-    bubbleSelector: BubbleSorter,
-    mergeSelector: MergeSorter,
-    quickSelector: QuickSorter,
-    heapSelector: HeapSorter}
+var config = {
+    stageID : "mainStage",
+    stageWidth : 1024,
+    baseSpeed : 1000,
+    baseSpeedDivisor : 100,
+    columnHeightMultiplier : 5,
+    numberOfElements : 30,
 
-class App{
+    selectedSorter : BubbleSorter,
+    selectableAlgorithms : {
+        bubbleSelector: BubbleSorter,
+        mergeSelector: MergeSorter,
+        quickSelector: QuickSorter,
+        heapSelector: HeapSorter},
+    sortableHTMLClasses : {
+        init:"bg-primary",
+        scan:"bg-secondary",
+        swappable:"bg-danger",
+        swapped:"bg-secondary"
+    },
+    newArrayElementTriggerID : "getMeNewArray",
+    doSortingElementID : "doSorting",
+    randomArray : Controller.getRandomArray(config.numberOfElements)
+}
 
-}
-sortableHTMLClasses = {
-    init:"bg-primary",
-    scan:"bg-secondary",
-    swappable:"bg-danger",
-    swapped:"bg-secondary"
-}
+var actualSpeed = config.baseSpeed/config.baseSpeedDivisor;
+
+
 var testArray   = Controller.getRandomArray(numberOfElements);
 var UIhndlr     = UIHandler.getInstance();
 
 var randomArray = Controller.getRandomArray(numberOfElements);
-var sortableElements = UIhndlr.initMainStage(stageID, randomArray);
+var sortableElements = UIhndlr.initMainStage(config.stageID, randomArray);
 
 
 selectedSorter.speed = actualSpeed;
@@ -35,7 +40,6 @@ var callBackFunction = function(params){
     
     var newClass = sortableHTMLClasses[params.action];
     var cleanClass = sortableHTMLClasses.init;
-
  
     if(params.action=="swapped"){
         swapUIUpdate(params, sortableElements);
@@ -47,43 +51,19 @@ var callBackFunction = function(params){
     return params;
 }
 
-var swapUIUpdate = function(params, sortableElements){
-    var whatElement = sortableElements[params.i];
-    var whatValue = params.arr[params.i];
-    var whatHeight = whatValue*blockHeightMultiplier;
 
-    var toElement =  sortableElements[params.j];
-    var toValue =  params.arr[params.j];
-    var toHeight = toValue*blockHeightMultiplier;
-
-    whatElement.innerHTML = toValue;
-    whatElement.style.height=toHeight+"px";
-
-    toElement.innerHTML = whatValue;
-    toElement.style.height=whatHeight+"px";
-
-}
-
-var cleanAndAddClass = function(element, newClass){
-    try{
-    element.classList = [];
-    element.classList.add(newClass);
-    } catch(e){
-        debugger;
-        console.log("There has been an error in the cleanAndAddClass function.")
-        console.log(newClass);
-        console.log(element);
-    }
-}
-var algSelectorClass = "alg-selector";
 var algSelectorElements = document.getElementsByClassName(algSelectorClass);
-var newArrayElementTriggerID = "getMeNewArray";
 var newArrayElementTriggerElement = document.getElementById(newArrayElementTriggerID);
 newArrayElementTriggerElement.addEventListener("click", ()=>{
     randomArray = Controller.getRandomArray();
     sortableElements = UIhndlr.initMainStage(stageID, randomArray);
 
 });
+
+var doSortingElement = document.getElementById(doSortingElementID);
+    doSortingElement.addEventListener("click", ()=>{
+        console.log("Sorting has been triggered.");
+    })
 
 
 var getMeId = function(){
