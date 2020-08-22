@@ -8,6 +8,10 @@
   <script src="classes/Constants.js" type="text/javascript"></script>
   <script src="classes/Sorter.js" type="text/javascript"></script>
   <script src="classes/BubbleSorter.js" type="text/javascript"></script>
+  <script src="classes/MergeSorter.js" type="text/javascript"></script>
+  <script src="classes/QuickSorter.js" type="text/javascript"></script>
+  <script src="classes/HeapSorter.js" type="text/javascript"></script>
+
   <script src="classes/Controller.js" type="text/javascript"></script>
   <script src="classes/UIHandler.js" type="text/javascript"></script>
 

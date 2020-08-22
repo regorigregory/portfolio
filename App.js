@@ -6,6 +6,12 @@ var baseSpeedDivisor = 100;
 var actualSpeed = baseSpeed/baseSpeedDivisor;
 var numberOfElements = 30;
 var selectedSorter = BubbleSorter;
+var selectableAlgorithms = {
+    bubbleSelector: BubbleSorter,
+    mergeSelector: MergeSorter,
+    quickSelector: QuickSorter,
+    heapSelector: HeapSorter}
+
 class App{
 
 }
@@ -18,10 +24,13 @@ sortableHTMLClasses = {
 var testArray   = Controller.getRandomArray(numberOfElements);
 var UIhndlr     = UIHandler.getInstance();
 
-var sortableElements = UIhndlr.initMainStage(stageID, testArray);
 var randomArray = Controller.getRandomArray(numberOfElements);
+var sortableElements = UIhndlr.initMainStage(stageID, randomArray);
+
 
 selectedSorter.speed = actualSpeed;
+
+
 var callBackFunction = function(params){
     
     var newClass = sortableHTMLClasses[params.action];
@@ -37,6 +46,7 @@ var callBackFunction = function(params){
 
     return params;
 }
+
 var swapUIUpdate = function(params, sortableElements){
     var whatElement = sortableElements[params.i];
     var whatValue = params.arr[params.i];
@@ -53,6 +63,7 @@ var swapUIUpdate = function(params, sortableElements){
     toElement.style.height=whatHeight+"px";
 
 }
+
 var cleanAndAddClass = function(element, newClass){
     try{
     element.classList = [];
@@ -64,6 +75,29 @@ var cleanAndAddClass = function(element, newClass){
         console.log(element);
     }
 }
+var algSelectorClass = "alg-selector";
+var algSelectorElements = document.getElementsByClassName(algSelectorClass);
+var newArrayElementTriggerID = "getMeNewArray";
+var newArrayElementTriggerElement = document.getElementById(newArrayElementTriggerID);
+newArrayElementTriggerElement.addEventListener("click", ()=>{
+    randomArray = Controller.getRandomArray();
+    sortableElements = UIhndlr.initMainStage(stageID, randomArray);
+
+});
 
 
-selectedSorter.sortArray(randomArray, callBackFunction)
+var getMeId = function(){
+    selectedSorter = selectableAlgorithms[this.id];
+    console.log(this.id);
+}
+
+for (var i =0; i<algSelectorElements.length; i++){
+    var currentElement = algSelectorElements[i];
+    console.log(currentElement.id);
+    currentElement.addEventListener("click", getMeId);
+}
+
+
+//selectedSorter.sortArray(randomArray, callBackFunction)
+var randArray = Controller.getRandomArray(5);
+MergeSorter.sortArray(randArray);

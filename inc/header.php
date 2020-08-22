@@ -19,10 +19,10 @@
       <div class="dropdown">
         <button id="my-dropdown" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithm</button>
         <div class="dropdown-menu" aria-labelledby="my-dropdown">
-          <a class="dropdown-item" href="#">Bubble sort</a>
-          <a class="dropdown-item" href="#">Merge sort</a>
-          <a class="dropdown-item" href="#">Quick sort</a>
-          <a class="dropdown-item" href="#">Heap sort</a>
+          <a class="dropdown-item alg-selector" href="#" id="bubbleSelector">Bubble sort</a>
+          <a class="dropdown-item alg-selector" href="#" id="mergeSelector">Merge sort</a>
+          <a class="dropdown-item alg-selector" href="#" id="quickSelector">Quick sort</a>
+          <a class="dropdown-item alg-selector" href="#" id="heapSelector">Heap sort</a>
         </div>
 
         <button id="my-dropdown2" class="btn btn-primary dropdown-toggle" 
@@ -40,7 +40,7 @@
             <input type="range" min="5" max="50" />
           </form>
         </div>
-        <a class="btn btn-outline-primary" href="#">Generate new array</a>
+        <a class="btn btn-outline-primary" href="#" id="getMeNewArray">Generate new array</a>
         <a class="btn btn-outline-danger" href="#">Sort!</a>
 
 
