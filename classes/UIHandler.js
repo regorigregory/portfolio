@@ -2,9 +2,13 @@ class UIHandler{
     static instance = undefined;
     
     constructor(config){
-        this.config = config;
+        this.config = undefined;
     }
-    
+    static configure(cnf){
+        var inst = UIHandler.getInstance();
+        inst.config = cnf;
+        return inst;
+    }
     static getInstance(){
         if(UIHandler.instance == undefined){
             UIHandler.instance = new UIHandler();
@@ -31,7 +35,7 @@ class UIHandler{
         var nElements = cnf.randomArray.length;
         var divBeingCooked = document.createElement("div");
 
-        divBeingCooked.classList.add(cnf.sortableHTMLClasses.untouched);
+        divBeingCooked.classList.add(cnf.sortableHTMLClasses.init);
         divBeingCooked.innerHTML = number;
         divBeingCooked.style.height = number*cnf.columnHeightMultiplier+"px";
         divBeingCooked.style.width = cnf.stageWidth/nElements+"px";
@@ -75,6 +79,22 @@ class UIHandler{
             console.log(newClass);
             console.log(element);
         }
+    }
+    callBackFunction(params){
+    
+        var newClass = sortableHTMLClasses[params.action];
+     
+        if(params.action=="swapped"){
+            swapUIUpdate(params, sortableElements);
+          }
+        cleanAndAddClass(sortableElements[params.i], newClass);
+        cleanAndAddClass(sortableElements[params.j], newClass);
+    
+        return params;
+    }
+
+    sortElements(){
+        this.config.selectedSorter.sortArray(this.config.randomArray, this.callBackFunction);
     }
 
     getMeId(){

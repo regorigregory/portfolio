@@ -1,11 +1,9 @@
 var config = {
-    stageID : "mainStage",
+    stageDivID : "mainStage",
     stageWidth : 1024,
     baseSpeed : 1000,
     baseSpeedDivisor : 100,
     columnHeightMultiplier : 5,
-    numberOfElements : 30,
-
     selectedSorter : BubbleSorter,
     selectableAlgorithms : {
         bubbleSelector: BubbleSorter,
@@ -20,17 +18,19 @@ var config = {
     },
     newArrayElementTriggerID : "getMeNewArray",
     doSortingElementID : "doSorting",
-    randomArray : Controller.getRandomArray(config.numberOfElements)
+    randomArray : Controller.getRandomArray(20)
 }
 
+var UIhndlr = UIHandler.configure(config);
+var sortableElements = UIhndlr.initMainStage();
+
+/*
 var actualSpeed = config.baseSpeed/config.baseSpeedDivisor;
 
 
 var testArray   = Controller.getRandomArray(numberOfElements);
-var UIhndlr     = UIHandler.getInstance();
 
 var randomArray = Controller.getRandomArray(numberOfElements);
-var sortableElements = UIhndlr.initMainStage(config.stageID, randomArray);
 
 
 selectedSorter.speed = actualSpeed;
@@ -80,4 +80,4 @@ for (var i =0; i<algSelectorElements.length; i++){
 
 //selectedSorter.sortArray(randomArray, callBackFunction)
 var randArray = Controller.getRandomArray(5);
-MergeSorter.sortArray(randArray);
+MergeSorter.sortArray(randArray);*/
