@@ -8,6 +8,7 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style.css">
 
   <title>Sorting algorithm demonstration</title>
 </head>
@@ -28,16 +29,17 @@
         <button id="my-dropdown2" class="btn btn-primary dropdown-toggle" 
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Speed</button>
         <div class="dropdown-menu" aria-labelledby="my-dropdown2">
-          <form class="range-field">
-            <input type="range" min="1" max="1000" />
+          <form class="range-field formWithSlider">
+            <input type="range" min="1" max="10" id="sortingSpeedSelector" value="1"/>
+            <span id="sortingSpeedIndicator">1</span>
           </form>
 
         </div>
         <button id="my-dropdown3" class="btn btn-primary dropdown-toggle" 
         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Array size</button>
         <div class="dropdown-menu" aria-labelledby="my-dropdown3">
-        <form class="range-field my-1 w-10">
-            <input type="range" min="5" max="50" />
+        <form class="range-field my-1 w-10 formWithSlider" id="arraySizeSelectorForm">
+            <input type="range" min="5" max="50" id="arraySizeSelector"/ value="20"><span id="arraySizeSelectorIndicator">20</span>
           </form>
         </div>
         <a class="btn btn-outline-primary" href="#" id="getMeNewArray">Generate new array</a>

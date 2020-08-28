@@ -1,5 +1,5 @@
 <?php
-include_once("./inc/header.php");
+include_once("./assets/header.php");
 ?>
 <div class="row" style="color:white" id="mainStage">
     <div class="col-1 bg-primary" style="float:left; height:622px" id="testInner">22</div>
@@ -15,6 +15,6 @@ include_once("./inc/header.php");
 
 
 <?php
-include_once("./inc/footer.php");
+include_once("./assets/footer.php");
 
 ?>

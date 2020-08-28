@@ -18,6 +18,10 @@ var config = {
     },
     newArrayElementTriggerID : "getMeNewArray",
     doSortingElementID : "doSorting",
+    arraySizeSelectorID: "arraySizeSelector",
+    arraySizeSelectorIndicatorID: "arraySizeSelectorIndicator",
+    sortingSpeedSelectorID:"sortingSpeedSelector",
+    sortingSpeedSelectorIndicatorID:"sortingSpeedIndicator",
     randomArraySize: 20,
     randomArray : Controller.getRandomArray(20)
 }

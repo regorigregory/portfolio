@@ -7,8 +7,10 @@ class UIHandler{
     static configure(cnf){
         var inst = UIHandler.getInstance();
         inst.config = cnf;
-        inst.bindGenerateNewAarray();
+        inst.bindGenerateNewArray();
         inst.bindSort();
+        inst.bindSizeSelector();
+        inst.bindSpeedSelector();
         return inst;
     }
     static getInstance(){
@@ -55,7 +57,6 @@ class UIHandler{
         var me = UIHandler.getInstance();
         var cnf = me.config;
         var sortableElements = me.currentDivs;
-        debugger;
         var whatElement = sortableElements[params.i];
         var whatValue = params.arr[params.i];
         var whatHeight = whatValue*cnf.columnHeightMultiplier;
@@ -104,7 +105,7 @@ class UIHandler{
         console.log(this.id);
     } */
 
-    bindGenerateNewAarray(){
+    bindGenerateNewArray(){
         var el = document.getElementById(this.config.newArrayElementTriggerID);
         var me =this;
         el.addEventListener("click", ()=>{
@@ -120,6 +121,37 @@ class UIHandler{
         me.config.selectedSorter.sortArray(me.config.randomArray, me.callBackFunction);
 
         });
+
+    }
+    bindSizeSelector(){
+        var me = UIHandler.getInstance();
+        var cnf = me.config;
+        var indicator = document.getElementById(cnf.arraySizeSelectorIndicatorID);
+        var slider = document.getElementById(cnf.arraySizeSelectorID);
+        var fun = function(){
+            var newValue = slider.value;
+            indicator.innerHTML = newValue;
+            cnf.randomArraySize = newValue;
+            cnf.randomArray = Controller.getRandomArray(newValue);
+            me.initMainStage();
+        };
+        //slider.addEventListener("change", fun);
+        slider.addEventListener("input", fun);
+
+    }
+    bindSpeedSelector(){
+        var me = UIHandler.getInstance();
+        var cnf = me.config;
+        var slider = document.getElementById(cnf.sortingSpeedSelectorID);
+        var indicator = document.getElementById(cnf.sortingSpeedSelectorIndicatorID);
+        var fun = function(){
+            var newValue = slider.value;
+            indicator.innerHTML = newValue;
+            cnf.baseSpeedDivisor = newValue*100;
+            cnf.selectedSorter.speed = cnf.baseSpeed / cnf.baseSpeedDivisor;
+        };
+        //slider.addEventListener("change", fun);
+        slider.addEventListener("input", fun);
 
     }
 
