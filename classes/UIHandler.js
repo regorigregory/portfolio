@@ -7,6 +7,8 @@ class UIHandler{
     static configure(cnf){
         var inst = UIHandler.getInstance();
         inst.config = cnf;
+        inst.bindGenerateNewAarray();
+        inst.bindSort();
         return inst;
     }
     static getInstance(){
@@ -26,7 +28,6 @@ class UIHandler{
             newDivs.push(cookedDiv);
         }
         this.currentDivs = newDivs;
-        return newDivs;
 
     }
 
@@ -51,15 +52,17 @@ class UIHandler{
     }
 
     swapUIUpdate(params){
-        var cnf = this.config;
-        var sortableElements = this.currentDivs;
+        var me = UIHandler.getInstance();
+        var cnf = me.config;
+        var sortableElements = me.currentDivs;
+        debugger;
         var whatElement = sortableElements[params.i];
         var whatValue = params.arr[params.i];
-        var whatHeight = whatValue*blockHeightMultiplier;
+        var whatHeight = whatValue*cnf.columnHeightMultiplier;
     
         var toElement =  sortableElements[params.j];
         var toValue =  params.arr[params.j];
-        var toHeight = toValue*blockHeightMultiplier;
+        var toHeight = toValue*cnf.columnHeightMultiplier;
     
         whatElement.innerHTML = toValue;
         whatElement.style.height=toHeight+"px";
@@ -80,26 +83,44 @@ class UIHandler{
             console.log(element);
         }
     }
+
     callBackFunction(params){
-    
-        var newClass = sortableHTMLClasses[params.action];
-     
+        //debugger;
+        var me = UIHandler.getInstance();
+        var newClass = me.config.sortableHTMLClasses[params.action];
+        var sortableElements = me.currentDivs;
         if(params.action=="swapped"){
-            swapUIUpdate(params, sortableElements);
+            me.swapUIUpdate(params, sortableElements);
           }
-        cleanAndAddClass(sortableElements[params.i], newClass);
-        cleanAndAddClass(sortableElements[params.j], newClass);
+        me.cleanAndAddClass(sortableElements[params.i], newClass);
+        me.cleanAndAddClass(sortableElements[params.j], newClass);
     
         return params;
     }
 
-    sortElements(){
-        this.config.selectedSorter.sortArray(this.config.randomArray, this.callBackFunction);
-    }
-
+    /*
     getMeId(){
         selectedSorter = selectableAlgorithms[this.id];
         console.log(this.id);
+    } */
+
+    bindGenerateNewAarray(){
+        var el = document.getElementById(this.config.newArrayElementTriggerID);
+        var me =this;
+        el.addEventListener("click", ()=>{
+            var arraySize = me.config.randomArraySize;
+            me.config.randomArray = Controller.getRandomArray(arraySize);
+            me.initMainStage();
+        });
+    }
+    bindSort(){
+        var el = document.getElementById(this.config.doSortingElementID);
+        var me = this;
+        el.addEventListener("click", function(){
+        me.config.selectedSorter.sortArray(me.config.randomArray, me.callBackFunction);
+
+        });
+
     }
 
 }

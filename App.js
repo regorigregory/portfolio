@@ -18,12 +18,13 @@ var config = {
     },
     newArrayElementTriggerID : "getMeNewArray",
     doSortingElementID : "doSorting",
+    randomArraySize: 20,
     randomArray : Controller.getRandomArray(20)
 }
 
 var UIhndlr = UIHandler.configure(config);
-var sortableElements = UIhndlr.initMainStage();
-
+UIhndlr.initMainStage();
+var sortableElements = UIhndlr.currentDivs;
 /*
 var actualSpeed = config.baseSpeed/config.baseSpeedDivisor;
 
