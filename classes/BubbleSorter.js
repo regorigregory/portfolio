@@ -25,8 +25,6 @@ class BubbleSorter extends Sorter{
                     await BubbleSorter.sleepWell(BubbleSorter.speed);
                     BubbleSorter.swap(j,j+1,arr);
 
-
-
                 }
                 paramsObject.action = "init"
                 callback(paramsObject);

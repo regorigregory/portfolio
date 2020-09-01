@@ -54,23 +54,28 @@ class UIHandler{
     }
 
     swapUIUpdate(params){
-        var me = UIHandler.getInstance();
-        var cnf = me.config;
-        var sortableElements = me.currentDivs;
-        var whatElement = sortableElements[params.i];
-        var whatValue = params.arr[params.i];
-        var whatHeight = whatValue*cnf.columnHeightMultiplier;
-    
-        var toElement =  sortableElements[params.j];
-        var toValue =  params.arr[params.j];
-        var toHeight = toValue*cnf.columnHeightMultiplier;
-    
-        whatElement.innerHTML = toValue;
-        whatElement.style.height=toHeight+"px";
-    
-        toElement.innerHTML = whatValue;
-        toElement.style.height=whatHeight+"px";
-    
+        if(params.i!=params.j){
+            try{
+                var me = UIHandler.getInstance();
+                var cnf = me.config;
+                var sortableElements = me.currentDivs;
+                var whatElement = sortableElements[params.i];
+                var whatValue = params.arr[params.i];
+                var whatHeight = whatValue*cnf.columnHeightMultiplier;
+            
+                var toElement =  sortableElements[params.j];
+                var toValue =  params.arr[params.j];
+                var toHeight = toValue*cnf.columnHeightMultiplier;
+            
+                whatElement.innerHTML = toValue;
+                whatElement.style.height=toHeight+"px";
+            
+                toElement.innerHTML = whatValue;
+                toElement.style.height=whatHeight+"px";
+            }catch(e){
+                console.log(`Index.i: ${params.i}, Index.j: ${params.j}`);
+            }  
+        }
     }
 
     cleanAndAddClass(element, newClass){
@@ -78,7 +83,6 @@ class UIHandler{
         element.classList = [];
         element.classList.add(newClass);
         } catch(e){
-            debugger;
             console.log("There has been an error in the cleanAndAddClass function.")
             console.log(newClass);
             console.log(element);
@@ -88,14 +92,33 @@ class UIHandler{
     callBackFunction(params){
         //debugger;
         var me = UIHandler.getInstance();
+
         var newClass = me.config.sortableHTMLClasses[params.action];
         var sortableElements = me.currentDivs;
-        if(params.action=="swapped"){
-            me.swapUIUpdate(params, sortableElements);
-          }
-        me.cleanAndAddClass(sortableElements[params.i], newClass);
-        me.cleanAndAddClass(sortableElements[params.j], newClass);
+
+        if(params.action == "pivot"){
+            var pivotElement = sortableElements[params.j];
+            me.cleanAndAddClass(pivotElement, newClass);
+
+        } else {
+            if(params.action=="swapped"){
+                me.swapUIUpdate(params, sortableElements);
+            }
+            
+            var elementA = sortableElements[params.i];
+            var elementB = sortableElements[params.j];
     
+            if(elementA && elementB){
+                me.cleanAndAddClass(elementA, newClass);
+                me.cleanAndAddClass(elementB, newClass);
+            } else {
+                console.log(`Non-existent-elements: Index.i: ${params.i}, Index.j: ${params.j}`);
+            }
+
+        }
+
+
+
         return params;
     }
 
@@ -139,6 +162,7 @@ class UIHandler{
         slider.addEventListener("input", fun);
 
     }
+
     bindSpeedSelector(){
         var me = UIHandler.getInstance();
         var cnf = me.config;
@@ -147,7 +171,7 @@ class UIHandler{
         var fun = function(){
             var newValue = slider.value;
             indicator.innerHTML = newValue;
-            cnf.baseSpeedDivisor = newValue*100;
+            cnf.baseSpeedDivisor = newValue*newValue;
             cnf.selectedSorter.speed = cnf.baseSpeed / cnf.baseSpeedDivisor;
         };
         //slider.addEventListener("change", fun);

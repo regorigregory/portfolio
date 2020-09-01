@@ -1,8 +1,8 @@
 class Controller{
 
     static defaultArraySize = 20;
-    static defaultMaximumEntry = 100;
-    static defaultMinimumEntry = 10;
+    static defaultMaximumEntry = 90;
+    static defaultMinimumEntry = 5;
 
     static setSorter(sorterInstance){
         Controller.sorter = sorterInstance;
