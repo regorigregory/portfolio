@@ -14,8 +14,10 @@ var config = {
         init:"bg-secondary",
         scan:"bg-primary",
         swappable:"bg-danger",
-        swapped:"bg-secondary",
-        pivot:"bg-warning"
+        swapped:"bg-success",
+        pivot:"bg-warning",
+        done: "bg-success",
+        reset: "bg-secondary"
 
     },
     newArrayElementTriggerID : "getMeNewArray",

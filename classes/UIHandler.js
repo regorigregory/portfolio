@@ -79,6 +79,7 @@ class UIHandler{
     }
 
     cleanAndAddClass(element, newClass){
+
         try{
         element.classList = [];
         element.classList.add(newClass);
@@ -90,7 +91,6 @@ class UIHandler{
     }
 
     callBackFunction(params){
-
         var me = UIHandler.getInstance();
 
         var newClass = me.config.sortableHTMLClasses[params.action];
@@ -100,6 +100,13 @@ class UIHandler{
             var pivotElement = sortableElements[params.j];
             me.cleanAndAddClass(pivotElement, newClass);
 
+        } else if(params.action == "reset" || params.action == "done"){
+
+            var selectedClass = me.config.sortableHTMLClasses[params.action]
+
+            for (var i = 0; i<sortableElements.length; i++){
+                me.cleanAndAddClass(sortableElements[i],  selectedClass);
+            }
         } else {
             if(params.action=="swapped"){
                 me.swapUIUpdate(params, sortableElements);
