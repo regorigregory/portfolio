@@ -90,7 +90,7 @@ class UIHandler{
     }
 
     callBackFunction(params){
-        //debugger;
+
         var me = UIHandler.getInstance();
 
         var newClass = me.config.sortableHTMLClasses[params.action];
@@ -104,7 +104,7 @@ class UIHandler{
             if(params.action=="swapped"){
                 me.swapUIUpdate(params, sortableElements);
             }
-            
+
             var elementA = sortableElements[params.i];
             var elementB = sortableElements[params.j];
     
@@ -114,19 +114,10 @@ class UIHandler{
             } else {
                 console.log(`Non-existent-elements: Index.i: ${params.i}, Index.j: ${params.j}`);
             }
-
         }
-
-
-
         return params;
     }
 
-    /*
-    getMeId(){
-        selectedSorter = selectableAlgorithms[this.id];
-        console.log(this.id);
-    } */
 
     bindGenerateNewArray(){
         var el = document.getElementById(this.config.newArrayElementTriggerID);

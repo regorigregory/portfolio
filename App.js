@@ -11,8 +11,8 @@ var config = {
         quickSelector: QuickSorter,
         heapSelector: HeapSorter},
     sortableHTMLClasses : {
-        init:"bg-primary",
-        scan:"bg-secondary",
+        init:"bg-secondary",
+        scan:"bg-primary",
         swappable:"bg-danger",
         swapped:"bg-secondary",
         pivot:"bg-warning"
